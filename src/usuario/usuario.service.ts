@@ -23,7 +23,12 @@ export class UsuarioService {
         return usuario_db
     }
 
-    async buscarPorId() { }
+    async buscarPorId(data: number) {
+        const usuario_db = await this.repository.buscarPorId(data);
+        if (!usuario_db) throw new AppError("Usuário não encontrado!", 404);
+        const { senha: _, ...usuario } = usuario_db
+        return usuario
+    }
 
     async buscarPorEmail(data: string) {
         const usuario = await this.repository.buscarPorEmail(data);

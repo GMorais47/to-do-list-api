@@ -12,6 +12,14 @@ export class UsuarioRepository {
         })
     }
 
+    async buscarPorId(data: number){
+        return await this.prisma.usuario.findFirst({
+            where: {
+                id: data
+            }
+        })
+    }
+
     async criar(data: IRegistroDTO) {
         return await this.prisma.usuario.create({ data })
     }
