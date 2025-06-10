@@ -13,4 +13,9 @@ export class UsuarioController {
         return;
     }
 
+    async my(req: Request, res: Response) {
+        res.json({ usuario: req.usuario });
+        return;
+    }
+
 }
