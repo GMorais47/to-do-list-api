@@ -1,4 +1,5 @@
 import { EPrioridade, PrismaClient } from "../generated/prisma";
+import { IAtualizarTarefaDTO } from "./dtos/atualizar-tarefa.dto";
 import { ICriarTarefaDTO } from "./dtos/criar-tarefa.dto";
 
 export class TarefaRepository {
@@ -21,11 +22,26 @@ export class TarefaRepository {
         })
     }
 
-    async criar(dto: ICriarTarefaDTO, usuario_id: number) { 
+    async criar(dto: ICriarTarefaDTO, usuario_id: number) {
         return await this.prisma.tarefa.create({
             data: {
                 ...dto,
                 usuario_id
+            }
+        })
+    }
+
+    async atualizar(id: number, dto: IAtualizarTarefaDTO) {
+        return await this.prisma.tarefa.update({
+            where: { id },
+            data: dto
+        })
+    }
+
+    async deletar(id: number) {
+        return await this.prisma.tarefa.delete({
+            where: {
+                id
             }
         })
     }
